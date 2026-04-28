@@ -1,26 +1,113 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Calm UX Light Mode - Softer, dreamier */
+  --background: #fdfbf7; /* Very soft warm beige/off-white */
+  --foreground: #5c5c5c; /* Soft warm gray */
+  --muted: #f0eee9;
+  --muted-foreground: #9ca3af;
+  --accent: #f0f7ff; /* Extremely light blue */
+  --accent-foreground: #60a5fa;
+  --surface: rgba(255, 255, 255, 0.6);
+  --border: rgba(0, 0, 0, 0.04);
+  --shadow-color: rgba(100, 110, 140, 0.04);
+}
+
+.dark {
+  /* Calm UX Dark Mode - Deep, peaceful night */
+  --background: #0f1115; /* Very dark blue-gray */
+  --foreground: #d1d5db;
+  --muted: #1f2229;
+  --muted-foreground: #6b7280;
+  --accent: #1e293b;
+  --accent-foreground: #93c5fd;
+  --surface: rgba(20, 24, 32, 0.5);
+  --border: rgba(255, 255, 255, 0.03);
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, sans-serif;
+  
+  --shadow-calm: 0 10px 40px -10px var(--shadow-color), 0 1px 3px 0 rgba(0,0,0,0.01);
+  --shadow-float: 0 20px 50px -15px var(--shadow-color), 0 4px 6px -2px rgba(0,0,0,0.02);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  transition: background-color 0.8s ease, color 0.8s ease;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar for webkit */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* Ocultar scrollbars en el lienzo infinito */
+.hide-scrollbars::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbars {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.glass-panel {
+  background-color: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-calm);
+}
+
+.dark .glass-panel {
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.cloud-shape {
+  border-radius: 28px 28px 28px 12px;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-100px) rotate(15deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh) rotate(15deg);
+    opacity: 0;
+  }
 }
