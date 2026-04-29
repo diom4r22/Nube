@@ -37,22 +37,17 @@ export function CloudShape({ category, variant = 1, children, isHovered, likes =
         <div className="absolute inset-0 bg-yellow-400/20 blur-[40px] animate-pulse rounded-full" />
       )}
 
-      {/* Drop shadow suave / Glow */}
+      {/* Glow Suave (Sin blur pesado) */}
       <div 
-        className={`absolute inset-2 rounded-[80px] blur-[20px] transition-all duration-500 ${
-          isHovered ? 'opacity-30 scale-105' : 'opacity-15'
-        } ${isLegendary ? 'bg-yellow-400 opacity-40 blur-[30px]' : `bg-current ${theme.accent}`}`}
+        className={`absolute inset-4 rounded-full transition-all duration-500 ${
+          isHovered ? 'opacity-20 scale-110' : 'opacity-10'
+        } ${isLegendary ? 'bg-yellow-400' : `bg-current ${theme.accent}`}`}
       />
       
       {/* SVG Cloud Shape */}
       <svg
         viewBox="0 0 200 130"
-        className="absolute inset-0 w-full h-full"
-        style={{ 
-          filter: isHovered 
-            ? 'drop-shadow(0 10px 25px rgba(0,0,0,0.15))' 
-            : 'drop-shadow(0 4px 12px rgba(0,0,0,0.08))' 
-        }}
+        className="absolute inset-0 w-full h-full drop-shadow-md"
         preserveAspectRatio="none"
       >
         {/* Sombra inferior */}
